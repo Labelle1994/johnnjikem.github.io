@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>John Njikem — Special Education & AI-Personalized Learning Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F6F1;
+    --paper-raised: #FFFFFF;
+    --ink: #1E2A44;
+    --ink-soft: #55607A;
+    --ink-faint: #8891A5;
+    --amber: #B4791F;
+    --amber-deep: #8F5F14;
+    --teal: #2C5F5A;
+    --line: #DDD8C8;
+    --line-soft: #E9E5D8;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #171B26;
+      --paper-raised: #1E2433;
+      --ink: #EDEFF5;
+      --ink-soft: #AEB4C7;
+      --ink-faint: #767E96;
+      --amber: #D9A54B;
+      --amber-deep: #E8BD70;
+      --teal: #6FA79F;
+      --line: #333A4E;
+      --line-soft: #262C3D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #171B26;
+    --paper-raised: #1E2433;
+    --ink: #EDEFF5;
+    --ink-soft: #AEB4C7;
+    --ink-faint: #767E96;
+    --amber: #D9A54B;
+    --amber-deep: #E8BD70;
+    --teal: #6FA79F;
+    --line: #333A4E;
+    --line-soft: #262C3D;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; color: var(--ink); }
+  a { color: var(--amber-deep); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover, a:focus-visible { border-bottom-color: currentColor; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
+  .shell { display: grid; grid-template-columns: 300px 1fr; max-width: 1180px; margin: 0 auto; }
+
+  /* ---- Sidebar ---- */
+  .sidebar {
+    position: sticky; top: 0; align-self: start;
+    height: 100vh;
+    padding: 3rem 2rem 2rem 2.5rem;
+    display: flex; flex-direction: column;
+    border-right: 1px solid var(--line);
+  }
+  .name { font-size: 1.7rem; line-height: 1.2; margin-bottom: 0.3rem; }
+  .role { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.6rem; }
+  .sidebar nav { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: auto; }
+  .sidebar nav a {
+    color: var(--ink-soft); font-size: 0.92rem; border-bottom: none;
+    padding: 0.15rem 0;
+  }
+  .sidebar nav a:hover, .sidebar nav a.active { color: var(--amber-deep); }
+  .sidebar-links { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; font-size: 0.85rem; }
+  .sidebar-links a { color: var(--ink-faint); }
+  .sidebar-links a:hover { color: var(--amber-deep); }
+
+  /* ---- Main ---- */
+  main { padding: 0 2.5rem; min-width: 0; }
+  .hero {
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    max-width: 20ch;
+    line-height: 1.15;
+    margin-bottom: 1.3rem;
+  }
+  .hero-quote {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    line-height: 1.5;
+    border-left: 2px solid var(--amber);
+    padding-left: 1.2rem;
+  }
+
+  section.block { padding: 3.4rem 0; border-bottom: 1px solid var(--line-soft); max-width: 72ch; }
+  section.block:last-of-type { border-bottom: none; }
+  .eyebrow { color: var(--amber-deep); font-size: 0.8rem; letter-spacing: 0.02em; margin-bottom: 0.6rem; font-weight: 500; }
+  section.block h2 { font-size: 1.55rem; margin-bottom: 1.1rem; }
+  section.block > p.lede { color: var(--ink-soft); font-size: 1.03rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .entries { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.6rem; }
+  .entry { position: relative; padding-left: 1.4rem; border-left: 2px solid var(--line); }
+  .entry .when { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-faint); }
+  .entry .what { font-weight: 600; font-size: 1rem; margin: 0.15rem 0 0.2rem; }
+  .entry .where { color: var(--ink-soft); font-size: 0.93rem; }
+  .entry .note { color: var(--ink-soft); font-size: 0.93rem; margin-top: 0.35rem; line-height: 1.55; }
+
+  .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 1.6rem; }
+  .pub-list li { font-size: 0.96rem; line-height: 1.6; color: var(--ink-soft); }
+  .pub-list .tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    color: var(--teal); border: 1px solid var(--teal); border-radius: 3px;
+    padding: 0.1rem 0.4rem; margin-right: 0.55rem; vertical-align: middle;
+  }
+  .pub-list .venue { font-style: italic; color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+  .chip { border: 1px solid var(--line); border-radius: 3px; padding: 0.3rem 0.65rem; font-size: 0.83rem; color: var(--ink-soft); }
+
+  footer.contact { padding: 3.5rem 0 5rem; }
+  footer.contact h2 { font-size: 1.55rem; margin-bottom: 0.8rem; }
+  footer.contact p { color: var(--ink-soft); max-width: 56ch; margin-bottom: 1.6rem; }
+  .contact-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-size: 0.95rem; }
+  .contact-row a { color: var(--ink); border-bottom: 1px solid var(--line); }
+  .contact-row a:hover { color: var(--amber-deep); border-bottom-color: var(--amber-deep); }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 2rem 1.4rem; }
+    .sidebar nav { flex-direction: row; flex-wrap: wrap; gap: 1rem; margin-bottom: 0; }
+    .sidebar-links { flex-direction: row; flex-wrap: wrap; gap: 1rem; margin-top: 1.2rem; }
+    main { padding: 0 1.4rem; }
+    .hero { padding: 2.6rem 0 2.2rem; }
+    section.block { padding: 2.4rem 0; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div>
+      <div class="name">John Njikem</div>
+      <div class="role">PhD Candidate, Special Education<br>Boston University</div>
+    </div>
+    <nav aria-label="Section navigation">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#practice">Practice</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+      <a href="#service">Service &amp; Recognition</a>
+    </nav>
+    <div class="sidebar-links">
+      <a href="mailto:njikemjo@bu.edu">Email</a>
+      <a href="https://www.linkedin.com/in/john-njikem-boston" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://orcid.org/0009-0009-5548-4907" target="_blank" rel="noopener">ORCID</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" id="about">
+      <h1>Researching whether AI can finally make individualized instruction possible at scale — for students with learning disabilities.</h1>
+      <p class="hero-quote">"Teaching is one of the most consequential acts of justice we can perform: the deliberate creation of conditions in which every learner, regardless of ability, background, or learning profile, can discover their own capacity to think, grow, and contribute."</p>
+    </section>
+
+    <section class="block" id="about-2">
+      <div class="eyebrow">About</div>
+      <h2>A scholar-practitioner's route into this question</h2>
+      <p class="lede">I came to this research the long way — through the classroom, not the seminar room. Before I studied how special education systems work, I ran one: as a resource teacher in Cameroon writing IEPs by hand for pupils with dyslexia and ADHD, and later as an instructor at a Massachusetts autism school applying ABA principles one student at a time. That decade of direct practice is the lens I bring to my doctoral work at Boston University's Wheelock College — a persistent, practical question about whether the current wave of AI-powered personalized learning tools genuinely helps teachers reach the students who are hardest to reach, or simply promises to. I hold that question with both technical rigor and real skepticism, which I think is exactly what it deserves.</p>
+    </section>
+
+    <section class="block" id="research">
+      <div class="eyebrow">Research</div>
+      <h2>A three-paper dissertation, from evidence to implementation</h2>
+      <p class="lede">My dissertation, <em>Evidence, Perceptions, and Experiences in the Implementation of Artificial Intelligence-Assisted Personalized Learning for Students with Learning Disabilities</em>, is built as a deliberate progression rather than three disconnected studies: first establishing what the existing evidence actually shows, then measuring whether U.S. K-12 teachers are ready and willing to adopt these tools, and finally listening closely to the special education teachers already doing it. Alongside this, I contribute to two federally funded IES research grants under Dr. Nancy J. Nelson, working directly with early-grade teachers implementing intensive reading interventions for students at risk of dyslexia.</p>
+      <div class="entries">
+        <div class="entry">
+          <div class="when">Paper I</div>
+          <div class="what">Systematic Review &amp; Meta-Analysis</div>
+          <div class="note">Standardized effect sizes and moderator analysis of AI-assisted personalized learning interventions on reading and math outcomes for K-12 students with specific learning disabilities.</div>
+        </div>
+        <div class="entry">
+          <div class="when">Paper II</div>
+          <div class="what">Teacher Adoption Survey (TAM)</div>
+          <div class="note">Cross-sectional survey applying the Technology Acceptance Model to U.S. K-12 teachers' usage patterns, perceived usefulness, and ethical concerns around generative AI for personalized instruction.</div>
+        </div>
+        <div class="entry">
+          <div class="when">Paper III</div>
+          <div class="what">Qualitative Case Study (Intelligent-TPACK)</div>
+          <div class="note">Case study of special education teachers already adopting or planning to adopt generative AI tools to support students with learning disabilities.</div>
+        </div>
+        <div class="entry">
+          <div class="when">2023 – Present</div>
+          <div class="what">Graduate Research Assistant, Wheelock College, Boston University</div>
+          <div class="note">Two funded IES grants under Dr. Nancy J. Nelson: a pilot intensive reading intervention within MTSS-R for students at risk of dyslexia, and a randomized controlled trial of the NumberShire Level K math intervention. Mixed-methods analysis of survey and interview data from 18 PreK–2 teacher interventionists across five school districts.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="teaching">
+      <div class="eyebrow">Teaching</div>
+      <h2>From supporting the classroom to leading it</h2>
+      <p class="lede">My teaching has moved in a clear arc — from supporting instruction to co-designing and delivering it — and each step has stayed close to the same core conviction: methods coursework only matters when it's tied tightly to the decisions teachers actually face. I've mentored master's students through the full arc of research methodology, and I now co-teach practicing K-12 teachers in applying Positive Behavioral Interventions and Supports as both a conceptual and organizational framework, not just a compliance checklist.</p>
+      <div class="entries">
+        <div class="entry">
+          <div class="when">Fall 2026</div>
+          <div class="what">Co-Instructor, SE 572: Culturally Relevant Approaches to Positive Behavioral Supports</div>
+          <div class="where">With Dr. Elizabeth Bettini · 23 K-12 teachers</div>
+        </div>
+        <div class="entry">
+          <div class="when">Fall 2025</div>
+          <div class="what">Teaching Assistant, SED SE 600: Introduction to Educational Research</div>
+          <div class="where">With Dr. Jerry Whitmore, Jr. · 25 master's students · SPSS &amp; NVivo 14</div>
+        </div>
+        <div class="entry">
+          <div class="when">Spring 2023</div>
+          <div class="what">Teaching Assistant, SED SE 503: Learning Disabilities, Characteristics and Methods</div>
+          <div class="where">With Dr. Nancy J. Nelson · 12 master's students</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="practice">
+      <div class="eyebrow">Practice</div>
+      <h2>A decade in the classroom, on two continents</h2>
+      <p class="lede">Before Boston University, I spent five years as a special education resource teacher at St. Rita Inclusive Primary School in Buea, Cameroon, writing and adapting IEPs for elementary pupils with learning disabilities and ADHD, and building the kind of home–school partnerships that keep at-risk learners from falling through the cracks. More recently, at the May Center School for Autism and Developmental Disabilities in Massachusetts, I applied Applied Behavior Analysis directly — reinforcement, task analysis, data-driven decision-making — with children and adolescents with moderate and severe autism. This is the ground truth my research keeps returning to.</p>
+      <div class="entries">
+        <div class="entry">
+          <div class="when">May – Aug 2025</div>
+          <div class="what">Special Education Summer Instructor, May Center School for Autism and Developmental Disabilities</div>
+          <div class="where">Randolph, MA</div>
+        </div>
+        <div class="entry">
+          <div class="when">Sept 2015 – June 2020</div>
+          <div class="what">Special Education Resource Teacher, St. Rita Inclusive Primary School</div>
+          <div class="where">Buea, Cameroon</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="publications">
+      <div class="eyebrow">Publications</div>
+      <h2>A growing, field-tested record</h2>
+      <p class="lede">My publications trace the same line as my dissertation — from classroom-level accommodation research to the evidence base on AI-assisted instruction — and each has gone through the same peer scrutiny I now provide as a reviewer for two journals in the field.</p>
+      <ul class="pub-list">
+        <li><span class="tag">Under Review</span>Intensifying Reading Instruction within MTSS-R: Early-Grade Educators' Experiences with Intensive Reading Intervention for Students at Risk for Dyslexia. <span class="venue">Journal of Learning Disabilities.</span></li>
+        <li><span class="tag">Under Review</span>Special Education in the Era of Artificial Intelligence: Leveraging U.S. Evidence-Based AI Research to Develop Personalized Literacy Instruction for Students with Learning Disabilities. <span class="venue">Journal of AI.</span></li>
+        <li><span class="tag">In Prep</span>The Effectiveness of AI-Assisted Personalized Learning on Reading and Math Outcomes Among Students with Learning Disabilities: A Systematic Review and Meta-Analysis.</li>
+        <li><span class="tag">2026</span>Advancing EdTech for Diverse Learners: Recent Trends in Computer-Assisted Instruction for Students with Learning Disabilities and English Language Learners. <span class="venue">International Journal of Technology in Education, 9(3), 685–708.</span></li>
+        <li><span class="tag">2026</span>Exploring Teachers' Perceptions of Classroom-Based Accommodation Among Students with ADHD in Inclusive Primary School in Buea, Cameroon. <span class="venue">International Journal of Special Education.</span></li>
+        <li><span class="tag">2022</span>Investigating Teachers' Use of Assistive Technology for Teaching Children with Learning Disabilities in Gothenburg. <span class="venue">Master's Thesis, University of Gothenburg.</span></li>
+      </ul>
+    </section>
+
+    <section class="block" id="education">
+      <div class="eyebrow">Education</div>
+      <h2>Built for this question, one degree at a time</h2>
+      <p class="lede">Each degree added a piece I now rely on directly: special education pedagogy from Cameroon, research methodology from Sweden, and now the doctoral training to bring both to bear on a live, unresolved question in U.S. classrooms.</p>
+      <div class="entries">
+        <div class="entry">
+          <div class="when">Expected June 2027</div>
+          <div class="what">Ph.D., Educational Studies (Special Education)</div>
+          <div class="where">Wheelock College of Education and Human Development, Boston University · Advisor: Dr. Nancy J. Nelson · Glenn Fellow</div>
+        </div>
+        <div class="entry">
+          <div class="when">June 2022</div>
+          <div class="what">M.Sc., Educational Research</div>
+          <div class="where">University of Gothenburg, Sweden</div>
+        </div>
+        <div class="entry">
+          <div class="when">June 2016</div>
+          <div class="what">M.Ed., Special Education</div>
+          <div class="where">University of Buea, Cameroon</div>
+        </div>
+        <div class="entry">
+          <div class="when">August 2011</div>
+          <div class="what">B.Ed., Special Education</div>
+          <div class="where">University of Buea, Cameroon</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="service">
+      <div class="eyebrow">Service &amp; Recognition</div>
+      <h2>Embedded in the field, not adjacent to it</h2>
+      <p class="lede">I've presented at the Council for Exceptional Children's national convention twice, represented the federally funded National Center on Improving Literacy at national conference exhibitions three years running, and review manuscripts for two journals in the field — work that keeps me learning what the field needs as much as what it already knows.</p>
+      <div class="chips">
+        <span class="chip">CEC — Learning Disability Division</span>
+        <span class="chip">International Dyslexia Association</span>
+        <span class="chip">ISTE + ASCD</span>
+        <span class="chip">SREE</span>
+        <span class="chip">Peer Reviewer, Int'l Journal of Special Education</span>
+        <span class="chip">Peer Reviewer, SAGE Journal of Education</span>
+      </div>
+    </section>
+
+    <footer class="contact" id="contact">
+      <h2>Let's talk</h2>
+      <p>I'm on the market for Fall 2027 faculty and research roles in special education, educational technology, and AI-in-education — and always glad to hear from researchers and practitioners working on the same problem.</p>
+      <div class="contact-row">
+        <a href="mailto:njikemjo@bu.edu">njikemjo@bu.edu</a>
+        <a href="https://www.linkedin.com/in/john-njikem-boston" target="_blank" rel="noopener">linkedin.com/in/john-njikem-boston</a>
+        <a href="https://orcid.org/0009-0009-5548-4907" target="_blank" rel="noopener">ORCID 0009-0009-5548-4907</a>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.sidebar nav a');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+  const setActive = () => {
+    let idx = 0;
+    sections.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 140) idx = i; });
+    links.forEach((l, i) => l.classList.toggle('active', i === idx));
+  };
+  document.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+</body>
+</html>
